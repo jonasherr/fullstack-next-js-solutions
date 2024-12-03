@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "name": "Altes Forstamt Sinntal - natürlich liebenswert",
+    "price": 74,
+    "images": [
+      "https://images.unsplash.com/photo-1542475025-12b507d2d4a6?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1543248939-ff40856f65d4?w=800&auto=format&fit=crop"
+    ],
+    "description": "Wunderbar restauriertes Forsthaus in malerischer Umgebung. Perfekt für Naturliebhaber und Erholungssuchende.",
+    "properties": { "kitchen": true, "wifi": true, "tv": true },
+    "bedrooms": 2,
+    "location": { "lat": 49.7939, "lon": 9.9512 },
+    "rating": 5,
+    "reviewCount": 38,
+    "reviews": [
+      {
+        "id": "1",
+        "title": "Man kann nicht genug Gutes sagen",
+        "rating": 5,
+        "content": "Liebevoll restauriertes kleines Häuschen, Teil einer sehr gepflegten Gesamtanlage.",
+        "author": "Risako M",
+        "date": "May 16, 2021"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Ferienhaus Seeblick - Am Wasser gebaut",
+    "price": 120,
+    "images": [
+      "https://images.unsplash.com/photo-1434025697302-54853b8da166?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1505576391880-b3f9d713dc4f?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502005097973-6a7082348e28?w=800&auto=format&fit=crop"
+    ],
+    "description": "Ein modernes Haus direkt am See, mit wunderschönem Blick und privatem Steg.",
+    "properties": { "kitchen": true, "wifi": true, "tv": false },
+    "bedrooms": 3,
+    "location": { "lat": 52.517, "lon": 13.388 },
+    "rating": 4.8,
+    "reviewCount": 25,
+    "reviews": [
+      {
+        "id": "1",
+        "title": "Ein Traum am Wasser",
+        "rating": 5,
+        "content": "Perfekt für den Sommerurlaub, der See ist direkt vor der Tür.",
+        "author": "Michael S",
+        "date": "July 12, 2023"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Berghütte Sonnenschein - In den Alpen",
+    "price": 85,
+    "images": [
+      "https://images.unsplash.com/photo-1447797864795-48437f910b2c?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1499916078039-922301b0eb9b?w=800&auto=format&fit=crop"
+    ],
+    "description": "Charmante Berghütte mit herrlicher Aussicht und gemütlichem Kamin.",
+    "properties": { "kitchen": true, "wifi": false, "tv": true },
+    "bedrooms": 2,
+    "location": { "lat": 47.525, "lon": 10.749 },
+    "rating": 4.9,
+    "reviewCount": 12,
+    "reviews": [
+      {
+        "id": "1",
+        "title": "Ein alpiner Traum",
+        "rating": 5,
+        "content": "Die Aussicht ist einfach fantastisch, und der Kamin macht es so gemütlich.",
+        "author": "Anna L",
+        "date": "March 5, 2022"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Kleines Landhaus am Deich",
+    "price": 68,
+    "images": [
+      "https://images.unsplash.com/photo-1671465436095-767210425904?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1477120206578-46b3ca98a4e2?w=800&auto=format&fit=crop"
+    ],
+    "description": "Gemütliches Landhaus, ideal für Familien und Fahrradfreunde, direkt am Deich.",
+    "properties": { "kitchen": true, "wifi": true, "tv": false },
+    "bedrooms": 2,
+    "location": { "lat": 53.217, "lon": 8.61 },
+    "rating": 4.6,
+    "reviewCount": 17,
+    "reviews": [
+      {
+        "id": "1",
+        "title": "Perfekt für Familien",
+        "rating": 5,
+        "content": "Wir hatten eine tolle Zeit. Das Haus ist wunderschön eingerichtet und perfekt gelegen.",
+        "author": "Marie K",
+        "date": "June 18, 2023"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Luxusvilla in der Toskana",
+    "price": 320,
+    "images": [
+      "https://images.unsplash.com/photo-1503627381655-17cf0637efc0?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1597218868981-1b68e15f0065?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1585128792020-803d29415281?w=800&auto=format&fit=crop"
+    ],
+    "description": "Exklusive Villa mit Pool, großer Terrasse und traumhaftem Blick auf die toskanische Landschaft.",
+    "properties": { "kitchen": true, "wifi": true, "tv": true },
+    "bedrooms": 4,
+    "location": { "lat": 43.769, "lon": 11.255 },
+    "rating": 4.7,
+    "reviewCount": 42,
+    "reviews": [
+      {
+        "id": "1",
+        "title": "Unvergesslich!",
+        "rating": 5,
+        "content": "Die Villa ist atemberaubend. Wir haben jeden Moment genossen.",
+        "author": "Laura B",
+        "date": "September 8, 2023"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Skandinavisches Ferienhaus am Fjord",
+    "price": 95,
+    "images": [
+      "https://images.unsplash.com/photo-1430285561322-7808604715df?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556595101-15dc5f6431e3?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1531835551805-16d864c8d311?w=800&auto=format&fit=crop"
+    ],
+    "description": "Modernes skandinavisches Design inmitten der Natur, perfekt für Outdoor-Aktivitäten.",
+    "properties": { "kitchen": true, "wifi": true, "tv": false },
+    "bedrooms": 3,
+    "location": { "lat": 60.472, "lon": 8.468 },
+    "rating": 4.5,
+    "reviewCount": 20,
+    "reviews": [
+      {
+        "id": "1",
+        "title": "Einfach perfekt!",
+        "rating": 5,
+        "content": "Tolles Haus, großartige Lage für Wanderungen.",
+        "author": "Tom H",
+        "date": "April 15, 2023"
+      },
+      {
+        "id": "bfc589b0-f269-46ce-af87-e4e39d4a90c4",
+        "rating": 1,
+        "title": "Super",
+        "content": null,
+        "author": "Max M",
+        "date": "23.11.2024"
+      },
+      {
+        "id": "e05e46ed-aec4-479c-a550-7c44ae15cbcb",
+        "rating": 1,
+        "title": "tt",
+        "content": "ttts",
+        "author": "tt",
+        "date": "23.11.2024"
+      },
+      {
+        "id": "2282980a-a338-4e4c-b5f1-e0f8694e4093",
+        "rating": 1,
+        "title": "hi",
+        "content": "gg",
+        "author": "h",
+        "date": "23.11.2024"
+      },
+      {
+        "id": "d924df28-8ade-4098-b505-0b2cf3b52fe6",
+        "rating": 1,
+        "title": "tt",
+        "content": "tt",
+        "author": "tt",
+        "date": "23.11.2024"
+      },
+      {
+        "id": "2bf06038-4cd6-45e6-b135-14740a6d5274",
+        "rating": 1,
+        "title": "ttt",
+        "content": "ttt3",
+        "author": "jonas",
+        "date": "23.11.2024"
+      },
+      {
+        "id": "8597a6c0-d287-4628-8e82-336d554cbab1",
+        "rating": 1,
+        "title": "Moinsen",
+        "content": "hi",
+        "author": "Sers",
+        "date": "23.11.2024"
+      },
+      {
+        "id": "f316da5d-68c6-4945-a74b-37526bc5ec98",
+        "rating": 3,
+        "title": "test",
+        "content": "hu",
+        "author": "name",
+        "date": "23.11.2024"
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+# Fullstack Next.js
+
+Willkommen zum Fullstack Next.js Workshop 👋
+
+Hier findest du alle Lösung zu den Aufgaben, die wir in den nächsten Tagen gemeinsam lösen:
+
+- [00 Startpunkt](https://github.com/jonasherr/fullstack-next-js-solutions/tree/00-startpunkt)
+- [01 Drizzle Installation](https://github.com/jonasherr/fullstack-next-js-solutions/tree/01-drizzle-installation)
+- [02 Daten Typen](https://github.com/jonasherr/fullstack-next-js-solutions/tree/02-daten-typen)
+- [03 Seeding](https://github.com/jonasherr/fullstack-next-js-solutions/tree/03-seeding)
+- [04 Constraints](https://github.com/jonasherr/fullstack-next-js-solutions/tree/04-constraints)
+- [05 Relations](https://github.com/jonasherr/fullstack-next-js-solutions/tree/05-relations)
+- [06 Config](https://github.com/jonasherr/fullstack-next-js-solutions/tree/06-config)
+- [07 Select oder Query](https://github.com/jonasherr/fullstack-next-js-solutions/tree/07-select-oder-query)
+- [08 Typen](https://github.com/jonasherr/fullstack-next-js-solutions/tree/08-typen)
+- [09 Select oder Query mit Filtern](https://github.com/jonasherr/fullstack-next-js-solutions/tree/09-select-oder-query-mit-filtern)
+- [10 Zod Env Variablen](https://github.com/jonasherr/fullstack-next-js-solutions/tree/10-zod-env-variablen)
+- [11 Zod Formular Validierung](https://github.com/jonasherr/fullstack-next-js-solutions/tree/11-zod-formular-validierung)
+- [12 Inserts](https://github.com/jonasherr/fullstack-next-js-solutions/tree/12-inserts)
+- [13 Update](https://github.com/jonasherr/fullstack-next-js-solutions/tree/13-update)
+- [14 Delete](https://github.com/jonasherr/fullstack-next-js-solutions/tree/14-delete)
+- [15 Transactions](https://github.com/jonasherr/fullstack-next-js-solutions/tree/15-transactions)
+- [16 Auth Config](https://github.com/jonasherr/fullstack-next-js-solutions/tree/16-auth-config)
+- [17 Protecting Ressources](https://github.com/jonasherr/fullstack-next-js-solutions/tree/17-protecting-ressources)
+- [18 Signin, Signout, Register](https://github.com/jonasherr/fullstack-next-js-solutions/tree/18-signin-signout-register)
+- [19 Auth in API Calls](https://github.com/jonasherr/fullstack-next-js-solutions/tree/19-auth-in-api-calls)
+
+## Nur Änderungen
+- [01 Drizzle Installation](https://github.com/jonasherr/fullstack-next-js-solutions/compare/00-startpunkt..01-drizzle-installation)
+- [02 Daten Typen](https://github.com/jonasherr/fullstack-next-js-solutions/compare/01-drizzle-installation..02-daten-typen)
+- [03 Seeding](https://github.com/jonasherr/fullstack-next-js-solutions/compare/02-daten-typen..03-seeding)
+- [04 Constraints](https://github.com/jonasherr/fullstack-next-js-solutions/compare/03-seeding..04-constraints)
+- [05 Relations](https://github.com/jonasherr/fullstack-next-js-solutions/compare/04-constraints..05-relations)
+- [06 Config](https://github.com/jonasherr/fullstack-next-js-solutions/compare/05-relations..06-config)
+- [07 Select oder Query](https://github.com/jonasherr/fullstack-next-js-solutions/compare/06-config..07-select-oder-query)
+- [08 Typen](https://github.com/jonasherr/fullstack-next-js-solutions/compare/07-select-oder-query..08-typen)
+- [09 Select oder Query mit Filtern](https://github.com/jonasherr/fullstack-next-js-solutions/compare/08-typen..09-select-oder-query-mit-filtern)
+- [10 Zod Env Variablen](https://github.com/jonasherr/fullstack-next-js-solutions/compare/09-select-oder-query-mit-filtern..10-zod-env-variablen)
+- [11 Zod Formular Validierung](https://github.com/jonasherr/fullstack-next-js-solutions/compare/10-zod-env-variablen..11-zod-formular-validierung)
+- [12 Inserts](https://github.com/jonasherr/fullstack-next-js-solutions/compare/11-zod-formular-validierung..12-inserts)
+- [13 Update](https://github.com/jonasherr/fullstack-next-js-solutions/compare/12-inserts..13-update)
+- [14 Delete](https://github.com/jonasherr/fullstack-next-js-solutions/compare/13-update..14-delete)
+- [15 Transactions](https://github.com/jonasherr/fullstack-next-js-solutions/compare/14-delete..15-transactions)
+- [16 Auth Config](https://github.com/jonasherr/fullstack-next-js-solutions/compare/15-transactions..16-auth-config)
+- [17 Protecting Ressources](https://github.com/jonasherr/fullstack-next-js-solutions/compare/16-auth-config..17-protecting-ressources)
+- [18 Signin, Signout, Register](https://github.com/jonasherr/fullstack-next-js-solutions/compare/17-protecting-ressources..18-signin-signout-register)
+- [19 Auth in API Calls](https://github.com/jonasherr/fullstack-next-js-solutions/compare/18-signin-signout-register..19-auth-in-api-calls)
