@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db": "docker compose up -d"
+    "db": "docker compose up -d",
+    "db:seed": "tsx ./src/lib/db/seed.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.2",
@@ -21,6 +22,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.6",
     "drizzle-orm": "^0.37.0",
+    "drizzle-seed": "^0.1.2",
     "lucide-react": "^0.454.0",
     "next": "15.0.2",
     "pg": "^8.13.1",
