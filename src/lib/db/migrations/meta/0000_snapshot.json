@@ -1,5 +1,5 @@
 {
-  "id": "d1565559-3c49-447c-bd2b-9e5009e9471c",
+  "id": "9facef5f-ae8e-42e6-a0fd-313880a41cae",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -24,12 +24,6 @@
             "cache": "1",
             "cycle": false
           }
-        },
-        "guestName": {
-          "name": "guestName",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
         },
         "status": {
           "name": "status",
@@ -62,39 +56,29 @@
           "primaryKey": false,
           "notNull": true
         },
-        "amenities": {
-          "name": "amenities",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "bnbName": {
-          "name": "bnbName",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "bnbAddress": {
-          "name": "bnbAddress",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "bnbPhone": {
-          "name": "bnbPhone",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "bnbEmail": {
-          "name": "bnbEmail",
-          "type": "text",
+        "listing_id": {
+          "name": "listing_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "bookings_listing_id_listings_id_fk": {
+          "name": "bookings_listing_id_listings_id_fk",
+          "tableFrom": "bookings",
+          "tableTo": "listings",
+          "columnsFrom": [
+            "listing_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -179,22 +163,35 @@
           "primaryKey": false,
           "notNull": true
         },
-        "rating": {
-          "name": "rating",
-          "type": "real",
+        "address": {
+          "name": "address",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "reviewCount": {
-          "name": "reviewCount",
+        "user_id": {
+          "name": "user_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "default": 0
+          "notNull": true
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "listings_user_id_users_id_fk": {
+          "name": "listings_user_id_users_id_fk",
+          "tableFrom": "listings",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -206,10 +203,6 @@
         "bedrooms_check": {
           "name": "bedrooms_check",
           "value": "\"listings\".\"bedrooms\" > 0"
-        },
-        "rating_check": {
-          "name": "rating_check",
-          "value": "\"listings\".\"rating\" BETWEEN 0 AND 5"
         }
       },
       "isRLSEnabled": false
@@ -253,21 +246,54 @@
           "primaryKey": false,
           "notNull": true
         },
-        "author": {
-          "name": "author",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
         "date": {
           "name": "date",
           "type": "date",
           "primaryKey": false,
           "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listing_id": {
+          "name": "listing_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "reviews_user_id_users_id_fk": {
+          "name": "reviews_user_id_users_id_fk",
+          "tableFrom": "reviews",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "reviews_listing_id_listings_id_fk": {
+          "name": "reviews_listing_id_listings_id_fk",
+          "tableFrom": "reviews",
+          "tableTo": "listings",
+          "columnsFrom": [
+            "listing_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -317,6 +343,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -338,6 +370,75 @@
           "value": "\"users\".\"age\" > 17"
         }
       },
+      "isRLSEnabled": false
+    },
+    "public.users_to_bookings": {
+      "name": "users_to_bookings",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "users_to_bookings_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "booking_id": {
+          "name": "booking_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "users_to_bookings_user_id_users_id_fk": {
+          "name": "users_to_bookings_user_id_users_id_fk",
+          "tableFrom": "users_to_bookings",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "users_to_bookings_booking_id_bookings_id_fk": {
+          "name": "users_to_bookings_booking_id_bookings_id_fk",
+          "tableFrom": "users_to_bookings",
+          "tableTo": "bookings",
+          "columnsFrom": [
+            "booking_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
       "isRLSEnabled": false
     }
   },
