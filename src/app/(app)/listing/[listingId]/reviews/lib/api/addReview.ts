@@ -5,7 +5,7 @@ import { Listing } from "@/app/(app)/lib/types/listing";
 import { ActionResponseType } from "@/lib/types/form";
 import { wait } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
-import { Review } from "../../components/reviews";
+import { Review } from "../../reviews/components/reviews";
 
 export const addReview = async (
   prevState: { message: string; userId: string; type?: ActionResponseType },
