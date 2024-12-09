@@ -4,6 +4,7 @@ import Image from "next/image";
 import { BookingForm } from "./booking-form";
 import { getListings } from "@/app/(app)/lib/db/listings";
 import { Reviews } from "../reviews/components/reviews";
+import { getRatingForListing } from "@/app/(app)/lib/utils";
 
 export const revalidate = 60 * 60 * 1;
 
@@ -11,6 +12,8 @@ export async function SingleListing({ id }: { id: string }) {
   const listings = await getListings();
   const listing = listings.find((l) => l.id === parseInt(id));
   if (!listing) throw new Error("Ferienwohnung konnte nicht gefunden werden");
+
+  const rating = getRatingForListing(listing);
 
   const userId = "123f";
 
@@ -31,19 +34,17 @@ export async function SingleListing({ id }: { id: string }) {
             <h2 className="sr-only">Reviews</h2>
             <div className="flex items-center">
               <p className="text-sm text-gray-700">
-                {listing.rating}
+                {rating}
                 <span className="sr-only"> von 5 Sternen</span>
               </p>
               <div className="ml-1 flex items-center">
-                {[0, 1, 2, 3, 4].map((rating) => (
+                {[0, 1, 2, 3, 4].map((star) => (
                   <StarIcon
-                    key={rating}
+                    key={star}
                     aria-hidden="true"
-                    fill={listing.rating > rating ? "#facc15" : "#e5e7eb"}
+                    fill={rating > star ? "#facc15" : "#e5e7eb"}
                     className={cn(
-                      listing.rating > rating
-                        ? "text-yellow-400"
-                        : "text-gray-200",
+                      rating > star ? "text-yellow-400" : "text-gray-200",
                       "h-5 w-5 shrink-0",
                     )}
                   />
@@ -57,7 +58,7 @@ export async function SingleListing({ id }: { id: string }) {
                   href="#reviews-heading"
                   className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Siehe alle {listing.reviewCount} Bewertungen
+                  Siehe alle {listing.reviews.length} Bewertungen
                 </a>
               </div>
             </div>
@@ -70,31 +71,16 @@ export async function SingleListing({ id }: { id: string }) {
           <h2 className="sr-only">Images</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
-            {listing.images.map((image, index) => {
-              const isPrimaryImage = index === 0;
-              return (
-                <div
-                  key={image}
-                  className={cn(
-                    isPrimaryImage
-                      ? "lg:col-span-2 lg:row-span-2"
-                      : "hidden lg:block",
-                    "aspect-square overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75 relative",
-                  )}
-                >
-                  <Image
-                    alt={listing.name}
-                    src={image}
-                    priority
-                    fill
-                    sizes={
-                      isPrimaryImage ? "(max-width: 1023px) 50vw, 90vw" : "40vw"
-                    }
-                    className={cn("rounded-lg object-cover object-center")}
-                  />
-                </div>
-              );
-            })}
+            <div className="lg:col-span-2 lg:row-span-2 aspect-square overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75 relative">
+              <Image
+                alt={listing.name}
+                src={listing.image}
+                priority
+                fill
+                sizes="(max-width: 1023px) 50vw, 90vw"
+                className="rounded-lg object-cover object-center"
+              />
+            </div>
           </div>
         </div>
 
@@ -115,17 +101,17 @@ export async function SingleListing({ id }: { id: string }) {
 
             <div className="prose prose-sm mt-4 text-gray-500">
               <ul role="list" className="flex flex-col gap-1">
-                {listing.properties.kitchen && (
+                {listing.kitchen && (
                   <li className="flex items-center gap-2">
                     <ChefHat /> Küche
                   </li>
                 )}
-                {listing.properties.wifi && (
+                {listing.wifi && (
                   <li className="flex items-center gap-2">
                     <Wifi /> W-Lan
                   </li>
                 )}
-                {listing.properties.tv && (
+                {listing.tv && (
                   <li className="flex items-center gap-2">
                     <TvMinimal /> Fernseher
                   </li>
