@@ -5,6 +5,7 @@ import { BookingForm } from "./booking-form";
 import { getListings } from "@/app/(app)/lib/db/listings";
 import { Reviews } from "../reviews/components/reviews";
 import { getRatingForListing } from "@/app/(app)/lib/utils";
+import { Reviews } from "../reviews/components/reviews";
 
 export const revalidate = 60 * 60 * 1;
 

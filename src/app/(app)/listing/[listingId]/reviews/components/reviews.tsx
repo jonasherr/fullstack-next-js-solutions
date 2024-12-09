@@ -4,15 +4,7 @@ import { cn } from "@/lib/utils";
 import { Loader, StarIcon } from "lucide-react";
 import React, { useOptimistic } from "react";
 import { ReviewForm } from "./review-form";
-
-export type Review = {
-  id: string;
-  title: string;
-  rating: number;
-  content: string;
-  author: string;
-  date: string;
-};
+import { Review } from "../lib/db/reviews.sql";
 
 type ReviewsProps = {
   reviews: Review[];
@@ -83,7 +75,7 @@ export const Reviews = ({ reviews, listingId }: ReviewsProps) => {
             </div>
 
             <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-              <p className="font-medium text-gray-900">{review.author}</p>
+              <p className="font-medium text-gray-900">{review.userId}</p>
               <time className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
                 {review.date}
               </time>

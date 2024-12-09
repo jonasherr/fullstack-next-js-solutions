@@ -13,6 +13,8 @@ export const getListings = async () => {
   });
 };
 
+export type CompleteListing = Awaited<ReturnType<typeof getListings>>[0];
+
 export const updateListings = async (listings: Listing[]) => {
   await fs.writeFile(listingLocation, JSON.stringify(listings));
 };

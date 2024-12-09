@@ -5,12 +5,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { ActionResponseType } from "@/lib/types/form";
 import { useActionState } from "react";
 import { addReview } from "../lib/api/addReview";
-import { Review } from "./reviews";
+import { InsertReview } from "../lib/db/reviews.sql";
 
 type ReviewFormProps = {
   userId: string;
   listingId: string;
-  addOptimistic: (action: Review) => void;
+  addOptimistic: (action: InsertReview) => void;
 };
 
 export const ReviewForm = ({
@@ -25,13 +25,14 @@ export const ReviewForm = ({
   });
 
   const handleSubmit = async (formData: FormData) => {
-    const review: Review = {
+    const review: InsertReview & { id: string } = {
       id: "optimistic",
       rating: parseInt(formData.get("rating") as string),
       title: formData.get("title") as string,
       content: formData.get("content") as string,
-      author: formData.get("name") as string,
       date: new Date().toLocaleDateString("de-de"),
+      userId: 0,
+      listingId: 0,
     };
 
     addOptimistic(review);

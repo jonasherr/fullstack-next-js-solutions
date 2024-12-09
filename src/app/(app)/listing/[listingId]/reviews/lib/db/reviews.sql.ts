@@ -31,3 +31,6 @@ export const reviewsRelation = relations(reviewsTable, ({ one }) => ({
     references: [usersTable.id],
   }),
 }));
+
+export type Review = typeof reviewsTable.$inferSelect;
+export type InsertReview = typeof reviewsTable.$inferInsert;
