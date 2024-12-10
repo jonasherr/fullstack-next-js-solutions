@@ -8,6 +8,13 @@
       "when": 1733409078480,
       "tag": "0000_petite_madame_masque",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1733831472743,
+      "tag": "0001_vengeful_hercules",
+      "breakpoints": true
     }
   ]
 }

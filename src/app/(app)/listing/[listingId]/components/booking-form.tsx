@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { bookListing } from "../lib/api/bookListing";
+import { bookListing } from "../booking/lib/api/bookListing";
 import { useActionState } from "react";
 import { ActionResponseType } from "@/lib/types/form";
 
@@ -13,7 +13,7 @@ type BookingFormProps = {
 };
 export const BookingForm = ({ userId, listingId }: BookingFormProps) => {
   const [state, formAction] = useActionState(bookListing, {
-    message: "",
+    errors: { _errors: [] },
     userId,
     type: ActionResponseType.success,
   });
@@ -25,23 +25,33 @@ export const BookingForm = ({ userId, listingId }: BookingFormProps) => {
     >
       <div className="grid grid-cols-2 gap-1.5">
         <div>
-          <Label htmlFor="startDate">Startdatum</Label>
-          <Input type="date" id="startDate" name="startDate" />
+          <Label htmlFor="checkIn">Check-in</Label>
+          <Input type="date" id="checkIn" name="checkIn" />
+          {state.errors.checkIn && (
+            <p className="text-red-500">
+              {state.errors.checkIn._errors.join(", ")}
+            </p>
+          )}
         </div>
 
         <div>
-          <Label htmlFor="endDate">Enddatum</Label>
-          <Input type="date" id="endDate" name="endDate" />
+          <Label htmlFor="checkOut">Check-out</Label>
+          <Input type="date" id="checkOut" name="checkOut" />
+          {state.errors.checkOut && (
+            <p className="text-red-500">
+              {state.errors.checkOut._errors.join(", ")}
+            </p>
+          )}
         </div>
       </div>
 
-      <Label htmlFor="name">Name</Label>
-      <Input type="text" id="name" name="name" />
-
       <Label htmlFor="guests">Gäste</Label>
       <Input type="number" min={1} id="guests" name="guests" />
+      {state.errors.guests && (
+        <p className="text-red-500">{state.errors.guests._errors.join(", ")}</p>
+      )}
 
-      {state.message && (
+      {state.errors._errors.length !== 0 && (
         <p
           className={
             state.type === ActionResponseType.success
@@ -49,7 +59,7 @@ export const BookingForm = ({ userId, listingId }: BookingFormProps) => {
               : "text-red-500"
           }
         >
-          {state.message}
+          {state.errors._errors.join(", ")}
         </p>
       )}
 
