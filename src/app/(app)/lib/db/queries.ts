@@ -13,6 +13,13 @@ export const getListings = async () => {
   });
 };
 
+export const getListing = async (listingId: Listing["id"]) => {
+  return await db.query.listingsTable.findFirst({
+    where: (listingsTable, { eq }) => eq(listingsTable.id, listingId),
+    with: { reviews: true },
+  });
+};
+
 export type CompleteListing = Awaited<ReturnType<typeof getListings>>[0];
 
 export const updateListings = async (listings: Listing[]) => {

@@ -8,7 +8,7 @@ import { useActionState } from "react";
 import { ActionResponseType } from "@/lib/types/form";
 
 type BookingFormProps = {
-  userId: string;
+  userId: number;
   listingId: string;
 };
 export const BookingForm = ({ userId, listingId }: BookingFormProps) => {

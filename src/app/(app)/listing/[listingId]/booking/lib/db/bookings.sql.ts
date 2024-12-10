@@ -2,6 +2,7 @@ import { listingsTable } from "@/app/(app)/lib/db/listings.sql";
 import { usersToBookingsTable } from "@/lib/db/schema.sql";
 import { relations, sql } from "drizzle-orm";
 import { integer, pgTable, date, pgEnum, check } from "drizzle-orm/pg-core";
+import { getBookings } from "../api/queries";
 
 export const bookingStatusEnum = pgEnum("booking_status", [
   "Confirmed",
@@ -13,7 +14,7 @@ export const bookingsTable = pgTable(
   "bookings",
   {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    status: bookingStatusEnum(),
+    status: bookingStatusEnum().notNull(),
     checkIn: date().notNull(),
     checkOut: date().notNull(),
     guests: integer().notNull(),
@@ -35,3 +36,7 @@ export const bookingsRelation = relations(bookingsTable, ({ one }) => ({
   }),
   usersToBooking: one(usersToBookingsTable),
 }));
+
+export type Booking = typeof bookingsTable.$inferSelect;
+export type BookingStatus = Booking["status"];
+export type CompleteBooking = Awaited<ReturnType<typeof getBookings>>[0];

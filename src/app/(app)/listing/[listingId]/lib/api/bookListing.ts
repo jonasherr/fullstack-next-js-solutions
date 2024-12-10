@@ -4,7 +4,7 @@ import { ActionResponseType } from "@/lib/types/form";
 import { redirect } from "next/navigation";
 
 export const bookListing = async (
-  prevState: { message: string; userId: string; type?: ActionResponseType },
+  prevState: { message: string; userId: number; type?: ActionResponseType },
   formData: FormData,
 ) => {
   const userId = prevState.userId;

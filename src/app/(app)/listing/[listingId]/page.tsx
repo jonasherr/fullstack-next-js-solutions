@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { getListings } from "../../lib/db/listings";
 import { SingleListing } from "./components/single-listing";
+import { getListing } from "../../lib/db/queries";
 
 type ListingDetailPageProps = {
   params: Promise<{
@@ -12,9 +12,7 @@ export async function generateMetadata({
   params,
 }: ListingDetailPageProps): Promise<Metadata> {
   const id = (await params).listingId;
-  const listings = await getListings();
-
-  const listing = listings.find((l) => l.id === parseInt(id));
+  const listing = await getListing(parseInt(id));
 
   return {
     title: listing?.name,

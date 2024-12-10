@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { getListings } from "../lib/db/listings";
 import { getRatingForListing } from "../lib/utils";
+import { getListings } from "../lib/db/queries";
 
 export async function ListingsOverview() {
   const listings = await getListings();

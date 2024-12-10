@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { mockBookings } from "../lib/db/bookings";
+import { getBookings } from "./queries";
 
 export async function GET() {
-  const bookings = mockBookings;
+  const bookings = getBookings();
 
   return NextResponse.json(bookings);
 }

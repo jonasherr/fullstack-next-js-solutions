@@ -6,32 +6,29 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { CalendarDays, Users, Phone, Mail, MapPin } from "lucide-react";
-import { Booking, BookingStatus } from "../lib/types/booking";
+import {
+  CalendarDays,
+  Users,
+  Phone,
+  Mail,
+  MapPin,
+  ChefHat,
+  Wifi,
+  TvMinimal,
+} from "lucide-react";
+import { getBooking } from "../lib/api/queries";
 
-const mockBooking: Booking = {
-  id: "BK12345",
-  status: BookingStatus.Confirmed,
-  guestName: "John Doe",
-  checkIn: "2023-12-15",
-  checkOut: "2023-12-20",
-  guests: 2,
-  totalPrice: 750,
-  amenities: [
-    "Free Wi-Fi",
-    "Breakfast Included",
-    "Mountain View",
-    "Private Bathroom",
-  ],
-  bnbName: "Cozy Mountain Retreat",
-  bnbAddress: "123 Pine Lane, Mountain Town, MT 12345",
-  bnbPhone: "+1 (555) 123-4567",
-  bnbEmail: "info@cozymountainretreat.com",
+type BookingPageProps = {
+  params: Promise<{
+    bookingId: string;
+  }>;
 };
 
-export default function BookingConfirmation() {
-  const booking = mockBooking;
+export default async function BookingPage({ params }: BookingPageProps) {
+  const { bookingId } = await params;
+  const booking = await getBooking(parseInt(bookingId));
+
+  if (!booking) throw new Error("Buchung konnte nicht gefunden werden");
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -41,7 +38,7 @@ export default function BookingConfirmation() {
             Buchungsbestätigung
           </CardTitle>
           <CardDescription className="text-center">
-            Danke dass Sie sich für {booking.bnbName} entschieden haben
+            Danke dass Sie sich für {booking.listing.name} entschieden haben
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -58,7 +55,7 @@ export default function BookingConfirmation() {
                     <TableCell className="font-medium">
                       Name des Gastes
                     </TableCell>
-                    <TableCell>{booking.guestName}</TableCell>
+                    <TableCell>{booking.usersToBooking?.user.name}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium">
@@ -97,13 +94,23 @@ export default function BookingConfirmation() {
 
             <div>
               <h2 className="text-xl font-semibold mb-2">Amenities</h2>
-              <div className="flex flex-wrap gap-2">
-                {booking.amenities.map((amenity, index) => (
-                  <Badge key={index} variant="secondary">
-                    {amenity}
-                  </Badge>
-                ))}
-              </div>
+              <ul className="flex flex-wrap gap-2">
+                {booking.listing.kitchen && (
+                  <li className="flex items-center gap-2">
+                    <ChefHat /> Küche
+                  </li>
+                )}
+                {booking.listing.tv && (
+                  <li className="flex items-center gap-2">
+                    <Wifi /> W-Lan
+                  </li>
+                )}
+                {booking.listing.wifi && (
+                  <li className="flex items-center gap-2">
+                    <TvMinimal /> Fernseher
+                  </li>
+                )}
+              </ul>
             </div>
 
             <div>
@@ -111,21 +118,27 @@ export default function BookingConfirmation() {
               <Card>
                 <CardContent className="pt-6">
                   <p className="font-semibold text-lg mb-2">
-                    {booking.bnbName}
+                    {booking.listing.name}
                   </p>
                   <div className="space-y-2 text-sm">
                     <p className="flex items-center">
                       <MapPin className="mr-2 h-4 w-4" />
-                      {booking.bnbAddress}
+                      {booking.listing.address}
                     </p>
-                    <p className="flex items-center">
-                      <Phone className="mr-2 h-4 w-4" />
-                      {booking.bnbPhone}
-                    </p>
-                    <p className="flex items-center">
-                      <Mail className="mr-2 h-4 w-4" />
-                      {booking.bnbEmail}
-                    </p>
+                    {booking.usersToBooking?.user && (
+                      <>
+                        {booking.usersToBooking.user.phone && (
+                          <p className="flex items-center">
+                            <Phone className="mr-2 h-4 w-4" />
+                            {booking.usersToBooking?.user.phone}
+                          </p>
+                        )}
+                        <p className="flex items-center">
+                          <Mail className="mr-2 h-4 w-4" />
+                          {booking.usersToBooking?.user.email}
+                        </p>
+                      </>
+                    )}
                   </div>
                 </CardContent>
               </Card>

@@ -2,21 +2,17 @@ import { cn } from "@/lib/utils";
 import { ChefHat, StarIcon, TvMinimal, Wifi } from "lucide-react";
 import Image from "next/image";
 import { BookingForm } from "./booking-form";
-import { getListings } from "@/app/(app)/lib/db/listings";
 import { Reviews } from "../reviews/components/reviews";
+import { getListing } from "@/app/(app)/lib/db/queries";
 import { getRatingForListing } from "@/app/(app)/lib/utils";
-import { Reviews } from "../reviews/components/reviews";
 
 export const revalidate = 60 * 60 * 1;
 
 export async function SingleListing({ id }: { id: string }) {
-  const listings = await getListings();
-  const listing = listings.find((l) => l.id === parseInt(id));
+  const listing = await getListing(parseInt(id));
   if (!listing) throw new Error("Ferienwohnung konnte nicht gefunden werden");
 
   const rating = getRatingForListing(listing);
-
-  const userId = "123f";
 
   return (
     <main className="mx-auto mt-8 max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:max-w-7xl lg:px-8">
@@ -64,7 +60,7 @@ export async function SingleListing({ id }: { id: string }) {
               </div>
             </div>
           </div>
-          <BookingForm userId={userId} listingId={id} />
+          <BookingForm userId={listing.userId} listingId={id} />
         </div>
 
         {/* Image gallery */}
