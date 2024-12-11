@@ -3,13 +3,14 @@ import { usersToBookingsTable } from "@/lib/db/schema.sql";
 import { relations, sql } from "drizzle-orm";
 import { integer, pgTable, date, pgEnum, check } from "drizzle-orm/pg-core";
 import { getBookings } from "../api/queries";
-import { createInsertSchema } from "drizzle-zod";
+import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
 
-export const bookingStatusEnum = pgEnum("booking_status", [
+export const bookingStatusValues = [
   "Confirmed",
   "Pending",
   "Cancelled",
-]);
+] as const;
+export const bookingStatusEnum = pgEnum("booking_status", bookingStatusValues);
 
 export const bookingsTable = pgTable(
   "bookings",
@@ -42,4 +43,5 @@ export type Booking = typeof bookingsTable.$inferSelect;
 export type BookingStatus = Booking["status"];
 export type CompleteBooking = Awaited<ReturnType<typeof getBookings>>[0];
 
-export const BookingInsertSchema = createInsertSchema(bookingsTable, {});
+export const BookingInsertSchema = createInsertSchema(bookingsTable);
+export const BookingUpdateSchema = createUpdateSchema(bookingsTable);
