@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChevronDown, ChevronUp, Pen } from "lucide-react";
+import { ChevronDown, ChevronUp, Pen, Trash } from "lucide-react";
 import { CompleteBooking } from "../lib/db/bookings.sql";
 import { useRouter } from "next/navigation";
 import { Paths } from "@/lib/types/utils";
@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/dialog";
 import { UpdateBookingForm } from "./update-booking-form";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { deleteBooking } from "../lib/api/deleteBooking";
+import { useToast } from "@/hooks/use-toast";
+import { ActionResponseType } from "@/lib/types/form";
 
 type BookingOverviewProps = {
   initialBookings: CompleteBooking[];
@@ -37,9 +40,13 @@ export default function BookingOverview({
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   const router = useRouter();
+  const { toast } = useToast();
 
-  const [openDialog, setOpenDialog] = useState<null | number>(null);
-  const openedBooking = bookings.find((b) => b.id === openDialog);
+  const [openUpdateDialog, setOpenUpdateDialog] = useState<null | number>(null);
+  const openedBooking = bookings.find((b) => b.id === openUpdateDialog);
+
+  const [openDeleteDialog, setOpenDeleteDialog] = useState<null | number>(null);
+  const openedDeleteBooking = bookings.find((b) => b.id === openDeleteDialog);
 
   const sortBookings = (column: Paths<CompleteBooking>) => {
     const newDirection =
@@ -69,11 +76,28 @@ export default function BookingOverview({
     );
   };
 
+  const closeDialogs = () => {
+    setOpenUpdateDialog(null);
+    setOpenDeleteDialog(null);
+  };
+
+  const handleDeleteBooking = async (bookingId: number) => {
+    const response = await deleteBooking(bookingId);
+    const isError = response.type === ActionResponseType.error;
+    if (isError) {
+      toast({
+        title: "Fehler beim Löschen",
+        description: "Irgendwas ist schief gegangen. Versuche es bitte erneut.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="container mx-auto py-10">
       <Dialog
-        open={openDialog !== null}
-        onOpenChange={() => setOpenDialog(null)}
+        open={openUpdateDialog !== null || openDeleteDialog !== null}
+        onOpenChange={closeDialogs}
       >
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -145,16 +169,26 @@ export default function BookingOverview({
                         {booking.status}
                       </span>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="flex gap-2">
                       <Button
                         variant="circle"
                         size="icon"
                         onClick={(event) => {
                           event.stopPropagation();
-                          setOpenDialog(booking.id);
+                          setOpenUpdateDialog(booking.id);
                         }}
                       >
                         <Pen className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="circle"
+                        size="icon"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setOpenDeleteDialog(booking.id);
+                        }}
+                      >
+                        <Trash className="h-4 w-4 text-destructive" />
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -174,6 +208,26 @@ export default function BookingOverview({
                 Passe die Buchung deines Gastes an.
               </DialogDescription>
               <UpdateBookingForm booking={openedBooking} />
+            </DialogHeader>
+          </DialogContent>
+        )}
+        {openedDeleteBooking && (
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                Buchung vom {openedDeleteBooking.checkIn} -{" "}
+                {openedDeleteBooking.checkIn}
+              </DialogTitle>
+              <DialogDescription>
+                Bist du sicher, dass du die Buchung löschen möchtest?
+                <br /> Das Löschen kann nicht rückgängig gemacht werden.
+              </DialogDescription>
+              <Button
+                variant="destructive"
+                onClick={() => handleDeleteBooking(openedDeleteBooking.id)}
+              >
+                Löschen
+              </Button>
             </DialogHeader>
           </DialogContent>
         )}
