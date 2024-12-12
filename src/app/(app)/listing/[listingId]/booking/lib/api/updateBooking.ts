@@ -37,12 +37,8 @@ export const updateBooking = async (
         guests: z.coerce.number().min(1),
         listingId: z.coerce.number(),
         id: z.coerce.number(),
-        checkIn: z.coerce.date().refine((date) => date >= today, {
-          message: "Check-in Datum muss heute oder in der Zukunft liegen.",
-        }),
-        checkOut: z.coerce.date().refine((date) => date >= today, {
-          message: "Check-out Datum muss heute oder in der Zukunft liegen.",
-        }),
+        checkIn: z.coerce.date(),
+        checkOut: z.coerce.date(),
       }),
     )
       .superRefine(({ checkIn, checkOut }, ctx) => {

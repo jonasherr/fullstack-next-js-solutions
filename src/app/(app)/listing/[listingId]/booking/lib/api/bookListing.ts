@@ -81,26 +81,27 @@ export const bookListing = async (
       checkOut: parsedFormData.checkOut,
       listingId,
     });
-    // TODO: insert booking und insert usersToBookingsTable sollte nur gemeinsam passieren.
-    // das erreicht man mit Transactions
-    // diese lernen wir noch
     const insertData = {
       ...parsedFormData,
       totalPrice,
     };
-    const booking = await db
-      .insert(bookingsTable)
-      // @ts-expect-error next-line type is correct and parsed
-      .values(insertData)
-      .returning({ bookingId: bookingsTable.id });
-    bookingId = booking[0].bookingId;
 
-    const insertUserToBooking = {
-      // TODO: wenn wir Authentication eingebaut haben, können wir die statische userId entfernen
-      userId: 1,
-      bookingId,
-    };
-    await db.insert(usersToBookingsTable).values(insertUserToBooking);
+    bookingId = await db.transaction(async (tx) => {
+      const booking = await tx
+        .insert(bookingsTable)
+        // @ts-expect-error next-line type is correct and parsed
+        .values(insertData)
+        .returning({ bookingId: bookingsTable.id });
+      const bookingId = booking[0].bookingId;
+
+      const insertUserToBooking = {
+        // TODO: wenn wir Authentication eingebaut haben, können wir die statische userId entfernen
+        userId: 1,
+        bookingId,
+      };
+      await tx.insert(usersToBookingsTable).values(insertUserToBooking);
+      return bookingId;
+    });
   } catch (error) {
     console.error(error);
     return {
