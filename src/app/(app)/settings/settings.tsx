@@ -60,7 +60,6 @@ export function Settings() {
               </div>
             </dl>
           </div>
-
           <div>
             <h2 className="text-base/7 font-semibold text-gray-900">
               Bank accounts
@@ -104,7 +103,6 @@ export function Settings() {
               </button>
             </div>
           </div>
-
           <div>
             <h2 className="text-base/7 font-semibold text-gray-900">
               Integrations
@@ -137,7 +135,6 @@ export function Settings() {
               </button>
             </div>
           </div>
-
           <div>
             <h2 className="text-base/7 font-semibold text-gray-900">
               Language and dates
