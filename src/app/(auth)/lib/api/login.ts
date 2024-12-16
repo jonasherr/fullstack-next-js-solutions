@@ -1,12 +1,12 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { signIn } from "@/lib/auth";
+import { isRedirectError } from "next/dist/client/components/redirect";
 
-export const login = async () => {
-  const cookieStore = await cookies();
-
-  cookieStore.set("auth", "yay!");
-
-  redirect("/");
+export const login = async (formData: FormData) => {
+  try {
+    await signIn("credentials", formData, { redirectTo: "/" });
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
+  }
 };

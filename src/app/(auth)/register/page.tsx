@@ -1,8 +1,20 @@
+"use client";
+
 import logo from "@/assets/next.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { createUser } from "../lib/api/createUser";
+import { useActionState } from "react";
+import { ActionResponseType } from "@/lib/types/form";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function RegisterPage() {
+  const [state, formAction] = useActionState(createUser, {
+    errors: { _errors: [] },
+    type: ActionResponseType.success,
+  });
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -13,62 +25,70 @@ export default function RegisterPage() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form action="#" method="POST" className="space-y-6">
+        <form action={formAction} className="space-y-6">
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm/6 font-medium text-gray-900"
-            >
-              Email address
-            </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-              />
-            </div>
+            <Label htmlFor="email">Email address</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+            />
+
+            {state.errors.email && (
+              <p className="text-red-500">
+                {state.errors.email._errors.join(", ")}
+              </p>
+            )}
           </div>
 
           <div>
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Password
-              </label>
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                autoComplete="current-password"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-              />
-            </div>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              required
+              autoComplete="current-password"
+            />
           </div>
 
           <div>
-            <Link
-              href="/"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Registrieren
-            </Link>
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" name="name" required autoComplete="name" />
+
+            {state.errors.name && (
+              <p className="text-red-500">
+                {state.errors.name._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <Label htmlFor="age">Age</Label>
+            <Input id="age" name="age" required />
+
+            {state.errors.age && (
+              <p className="text-red-500">
+                {state.errors.age._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <Label htmlFor="phone">Telefonnummer</Label>
+            <Input id="phone" name="phone" required autoComplete="tel" />
+
+            {state.errors.phone && (
+              <p className="text-red-500">
+                {state.errors.phone._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <Button type="submit">Registrieren</Button>
           </div>
         </form>
 
@@ -76,7 +96,7 @@ export default function RegisterPage() {
           Schon Mitglied?{" "}
           <Link
             href="/login"
-            className="font-semibold text-indigo-600 hover:text-indigo-500"
+            className="font-semibold text-primary hover:underline"
           >
             Zum Login
           </Link>

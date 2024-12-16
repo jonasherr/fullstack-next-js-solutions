@@ -1,4 +1,5 @@
-import Link from "next/link";
+"use client";
+
 import logo from "@/assets/next.svg";
 import Image from "next/image";
 import { login } from "../lib/api/login";
@@ -14,7 +15,7 @@ export default function LoginPage() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form action="#" method="POST" className="space-y-6">
+        <form action={login} className="space-y-6">
           <div>
             <label
               htmlFor="email"
@@ -65,8 +66,7 @@ export default function LoginPage() {
 
           <div>
             <button
-              onClick={login}
-              type="button"
+              type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
