@@ -10,5 +10,11 @@ export {
   reviewsTable,
   reviewsRelation,
 } from "@/app/(app)/listing/[listingId]/reviews/lib/db/reviews.sql";
-export { usersTable, usersRelation } from "@/app/(auth)/lib/db/users.sql";
+export {
+  usersTable,
+  usersRelation,
+  accounts,
+  authenticators,
+  sessions,
+} from "@/app/(auth)/lib/db/users.sql";
 export { usersToBookingsTable, usersToBookingsRelation } from "./schema.sql";
