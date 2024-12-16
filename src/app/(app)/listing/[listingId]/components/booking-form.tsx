@@ -8,13 +8,11 @@ import { useActionState } from "react";
 import { ActionResponseType } from "@/lib/types/form";
 
 type BookingFormProps = {
-  userId: number;
   listingId: string;
 };
-export const BookingForm = ({ userId, listingId }: BookingFormProps) => {
+export const BookingForm = ({ listingId }: BookingFormProps) => {
   const [state, formAction] = useActionState(bookListing, {
     errors: { _errors: [] },
-    userId,
     type: ActionResponseType.success,
   });
 

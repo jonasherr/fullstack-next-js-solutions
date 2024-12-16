@@ -60,7 +60,7 @@ export async function SingleListing({ id }: { id: string }) {
               </div>
             </div>
           </div>
-          <BookingForm userId={listing.userId} listingId={id} />
+          <BookingForm listingId={id} />
         </div>
 
         {/* Image gallery */}

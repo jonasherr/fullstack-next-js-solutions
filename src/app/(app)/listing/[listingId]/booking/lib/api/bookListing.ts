@@ -11,22 +11,31 @@ import { z, ZodFormattedError } from "zod";
 import { db } from "@/lib/db";
 import { listingsTable, usersToBookingsTable } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { auth } from "@/lib/auth";
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 type PrevState = {
   errors: ZodFormattedError<Booking>;
-  userId: number;
   type?: ActionResponseType;
 };
 
 export const bookListing = async (
-  prevState: PrevState,
+  _prevState: PrevState,
   formData: FormData,
 ): Promise<PrevState> => {
   let bookingId: number;
   let listingId: number;
-  const userId = prevState.userId;
+  const authResponse = await auth();
+  const userId = authResponse?.user?.id;
+
+  if (!userId) {
+    return {
+      type: ActionResponseType.error,
+      errors: { _errors: ["Du musst eingeloggt sein."] },
+    };
+  }
+
   try {
     const payload = Object.fromEntries(formData.entries());
     const adjustedPayload = {
@@ -71,7 +80,6 @@ export const bookListing = async (
       return {
         type: ActionResponseType.error,
         errors: formattedErrors,
-        userId,
       };
     }
 
@@ -95,8 +103,7 @@ export const bookListing = async (
       const bookingId = booking[0].bookingId;
 
       const insertUserToBooking = {
-        // TODO: wenn wir Authentication eingebaut haben, können wir die statische userId entfernen
-        userId: 1,
+        userId: parseInt(userId),
         bookingId,
       };
       await tx.insert(usersToBookingsTable).values(insertUserToBooking);
@@ -107,7 +114,6 @@ export const bookListing = async (
     return {
       type: ActionResponseType.error,
       errors: { _errors: ["Ferienwohnung konnte nicht gebucht werden."] },
-      userId,
     };
   }
 
